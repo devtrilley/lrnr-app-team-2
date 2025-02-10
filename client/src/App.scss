@@ -1,0 +1,20 @@
+main {
+  /* Sample styling, just putting text in center of page */
+  text-align: center;
+  img {
+    width: 45%;
+    height: auto;
+  }
+}
+
+// CSS Reset for nav and footer
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+// Makes nav and footer take full width of screen
+.nav-wrapper, .page-footer {
+  width: 100%;
+}
