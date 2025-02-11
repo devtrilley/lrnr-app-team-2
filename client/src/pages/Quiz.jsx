@@ -1,20 +1,15 @@
-// Importing Card component
-import Card from "../components/Card";
+import QuizOptions from "../components/QuizOptions";
+import M from "materialize-css";
 
 export default function Quiz() {
+
   return (
-    <main>
-      <div className="container cus-hc-grid">
-        <div className="row">
-          <h1 className="left">Quiz Generation Options</h1>
-        </div>
-        <div className="row">
-          <h2 className="cus-quiz-desc left">
-            Please choose your preferences below to generate a quiz
-          </h2>
-        </div>
-        
+    <div className="quiz-container">
+      <div className="title-div">
+      <h1>Quiz Generation Options</h1>
+      <p>Please choose your preferences below to generate your personalized quiz</p>
       </div>
-    </main>
+      <QuizOptions />
+    </div>
   );
 }
