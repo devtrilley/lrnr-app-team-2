@@ -1,6 +1,7 @@
 main {
   /* Sample styling, just putting text in center of page */
   text-align: center;
+  min-height: 70vh;
   img {
     width: 45%;
     height: auto;
@@ -8,7 +9,6 @@ main {
 }
 
 // CSS Reset for nav and footer
-html,
 body {
   margin: 0;
   padding: 0;
