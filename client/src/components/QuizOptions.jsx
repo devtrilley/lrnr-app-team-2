@@ -2,29 +2,77 @@ import React, { useEffect, useState } from "react";
 import M from "materialize-css";
 
 export default function Header() {
-  const [selectedOption, setSelectedOption] = useState("");
-
+  const [selectedOptions, setSelectedOptions] = useState("");
+  const optionsData = [
+    {
+      category: "Topic",
+      options: [
+        { value: "golang", text: "golang" },
+        { value: "aws", text: "aws" },
+        { value: "javascript", text: "javascript" },
+        { value: "CI/CD", text: "CI/CD" },
+        { value: "home gardens", text: "home gardens" },
+        { value: "coffee", text: "coffee" },
+        { value: "finger foods", text: "finger foods" }
+      ]
+    },
+    {
+      category: "Expertise",
+      options: [
+        { value: "1", text: "novice" },
+        { value: "2", text: "intermediate" },
+        { value: "3", text: "expert" }
+      ]
+    } ,
+    {
+      category: "Number of questions",
+      options: [
+        { value: "5", text: "5" },
+        { value: "10", text: "10" },
+        { value: "15", text: "15" }
+      ]
+    },
+    {
+      category: "Style of questions",
+      options: [
+        { value: "master oogway", text: "master oogway" },
+        { value: "1940's gangster", text: "1940's gangster" },
+        { value: "like i'm an 8 year old", text: "like i'm an 8 year old" },
+        { value: "normal", text: "normal" },
+        { value: "jedi", text: "jedi" },
+        { value: "captain jack sparrow", text: "captain jack sparrow" },
+        { value: "matthew mcconaughey", text: "matthew mcconaughey" }
+      ]
+    },
+  ];
+  
   useEffect(() => {
-    // Initialize the Materialize select component
     const elems = document.querySelectorAll("select");
     M.FormSelect.init(elems);
   }, []);
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleChange = (category) => (event) => {
+    setSelectedOptions({
+      ...selectedOptions,
+      [category]: event.target.value,
+    });
   };
-
   return (
-    <div className="input-field col s12">
-      <select value={selectedOption} onChange={handleChange}>
-        <option value="" disabled>
-          Choose your option
-        </option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-      </select>
-      <label>Materialize Select</label>
-    </div>
+    <div className="quiz-div">
+      {optionsData.map((data) => (
+        <div className="input-field col s12" key={data.category}>
+          <select value={selectedOptions[data.category] || ""} onChange={handleChange(data.category)}>
+            <option value="" disabled>
+            </option>
+            {data.options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.text}
+              </option>
+            ))}
+          </select>
+          <label>{data.category}</label>
+        </div>
+      ))}
+      </div>
   );
 }
