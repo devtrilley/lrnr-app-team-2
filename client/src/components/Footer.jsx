@@ -5,9 +5,9 @@ export default function Footer() {
       <div className="container">
         <div className="row">
           <div className="col l6 s12">
-            <h5 className="white-text">Footer Content</h5>
             <p className="grey-text text-lighten-4">
-              You can use rows and columns here to organize your footer content.
+            Embrace the power of our app and unlock the secrets of the universe, one quiz at a time.
+            As I always say, 'Yesterday is history, tomorrow is a mystery, but today is a gift. That is why it is called the present.'
             </p>
           </div>
           <div className="col l4 offset-l2 s12">
@@ -15,22 +15,17 @@ export default function Footer() {
             <ul>
               <li>
                 <a className="grey-text text-lighten-3" href="#!">
-                  Link 1
+                  Home
                 </a>
               </li>
               <li>
                 <a className="grey-text text-lighten-3" href="#!">
-                  Link 2
+                  Quiz Generator
                 </a>
               </li>
               <li>
                 <a className="grey-text text-lighten-3" href="#!">
-                  Link 3
-                </a>
-              </li>
-              <li>
-                <a className="grey-text text-lighten-3" href="#!">
-                  Link 4
+                  Account
                 </a>
               </li>
             </ul>
@@ -39,10 +34,7 @@ export default function Footer() {
       </div>
       <div className="footer-copyright">
         <div className="container">
-          © 2014 Copyright Text
-          <a className="grey-text text-lighten-4 right" href="#!">
-            More Links
-          </a>
+          Made by <strong>Materialize</strong>
         </div>
       </div>
     </footer>

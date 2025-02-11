@@ -19,9 +19,9 @@ export default function Header() {
     <header>
       <nav className="nav-wrapper blue">
         <div className="container">
-          <a href="#" className="brand-logo center">
-            LRNR
-          </a>
+          <Link to="/" className="brand-logo">
+            lrnr
+          </Link>
           {/* Hamburger menu that triggers sidebar in mobile */}
           <a
             role="button"
@@ -32,16 +32,10 @@ export default function Header() {
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
               <Link to="/account">Account</Link>
             </li>
             <li>
-              <Link to="/quiz">Quiz</Link>
-            </li>
-            <li>
-              <Link to="/results">Results</Link>
+              <Link to="/quiz">Quiz Generation</Link>
             </li>
           </ul>
         </div>
