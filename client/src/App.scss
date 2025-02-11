@@ -18,3 +18,26 @@ body {
 .nav-wrapper, .page-footer {
   width: 100%;
 }
+
+.cus-home-tagline {
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+// Custom class, home card grid
+.cus-hc-grid {
+  border: none; // Change border for testing, can't leave sass selector empty
+}
+
+.cus-home-btn {
+  margin-top: 2rem;
+  margin-bottom: 6rem;
+}
+
+.cus-logo {
+  width: 30%;
+}
+
+.cus-quiz-desc {
+  font-size: 1rem;
+}

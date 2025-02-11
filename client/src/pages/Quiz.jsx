@@ -1,8 +1,20 @@
+// Importing Card component
+import Card from "../components/Card";
+
 export default function Quiz() {
   return (
     <main>
-      <h1>Quiz Page</h1>
-      <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="" />
+      <div className="container cus-hc-grid">
+        <div className="row">
+          <h1 className="left">Quiz Generation Options</h1>
+        </div>
+        <div className="row">
+          <h2 className="cus-quiz-desc left">
+            Please choose your preferences below to generate a quiz
+          </h2>
+        </div>
+        
+      </div>
     </main>
   );
 }
