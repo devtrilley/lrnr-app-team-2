@@ -31,7 +31,7 @@ app.post('/api/claude', async (req, res) => {
         messages: [
           {
             role: "user",
-            content: `Generate an array of ${numberOfQuestions} numbered ${expertise}-level questions about "${topic}". ${style !== 'default' ? `Frame them as if asked by ${style}.` : ''} Return just the questions.`
+            content:  `Generate a JavaScript array of ${numberOfQuestions} strings containing ${expertise}-level questions about "${topic}". ${style !== 'default' ? `Frame them as if asked by ${style}.` : ''} Return just the questions as an array.`
           }
         ],
         max_tokens: 300,
@@ -46,9 +46,9 @@ app.post('/api/claude', async (req, res) => {
     );
 
     // Extract the content from the response
-    const questions = response.data.content[0].text;
-    
-    res.json({ questions });
+    const questions = JSON.stringify(response.data.content[0].text);
+
+    res.json({ questions: JSON.parse(questions) }); 
   } catch (error) {
     console.error('Error:', error.response?.data || error.message);
     res.status(500).json({ 
