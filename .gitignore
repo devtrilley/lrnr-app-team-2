@@ -30,3 +30,4 @@ dist-ssr
 
 # Hidden file system in every folder for Finder, does nothing but clutter our code/repo
 .DS_Store
+.env
