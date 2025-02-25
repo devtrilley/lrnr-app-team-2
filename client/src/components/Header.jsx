@@ -52,7 +52,7 @@ export default function Header() {
           <Link to="/quiz">Quiz</Link>
         </li>
         <li>
-          <Link to="/results">Results</Link>
+          <Link to="/result">Results</Link>
         </li>
       </ul>
     </header>
