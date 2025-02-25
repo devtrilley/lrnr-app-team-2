@@ -14,7 +14,7 @@ import Footer from "./components/Footer";
 
 // Imports stylesheet for App Component
 import "./App.scss";
-import './components/Card.scss'
+import "./components/Card.scss";
 
 function App() {
   return (
@@ -22,18 +22,17 @@ function App() {
       {/* Header at top of all pages */}
       <Header />
 
-        {/* Container for all our routes */}
-        <Routes>
-          {/* Route for Home page. If user goes to path "/", render the Home page */}
-          <Route path="/" element={<Home />} />
-          {/* Route for Account page. If user goes to path "/Account", render the Account page */}
-          <Route path="/account" element={<Account />} />
-          {/* Route for Quiz page. If user goes to path "/Quiz", render the quiz options page */}
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/quizpage" element={<QuizPage />} />
-          <Route path="/result" element={<Result />} />
-
-        </Routes>
+      {/* Container for all our routes */}
+      <Routes>
+        {/* Route for Home page. If user goes to path "/", render the Home page */}
+        <Route path="/" element={<Home />} />
+        {/* Route for Account page. If user goes to path "/Account", render the Account page */}
+        <Route path="/account" element={<Account />} />
+        {/* Route for Quiz page. If user goes to path "/Quiz", render the quiz options page */}
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/quizpage" element={<QuizPage />} />
+        <Route path="/result" element={<Result />} />
+      </Routes>
 
       {/* Footer at bottom of all pages */}
       <Footer />
