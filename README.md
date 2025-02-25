@@ -1,13 +1,7 @@
-# LRNR QUIZ PAGE
+# LRNR 
 
-LRNR is a quiz generation application that utilizes the **Claude AI API** to create customized quizzes based on user input. This project involves refactoring the existing application (built with jQuery and GO) into **Node.js** and **React** while maintaining all current functionality. The goal is to create a clean, maintainable codebase that future teams can easily contribute to.
-
----
-
-## Business Case
-RV’s AI team has designed an application called **LRNR**, which uses the **Claude AI API** to generate customized quizzes based on user input. The original application was built using **jQuery** and **GO**, but leadership has requested a refactor into **Node.js** and **React** for better scalability and maintainability.
-
-The primary goal of this project is to recreate the existing application with the same functionality while ensuring the codebase is well-documented and accessible for future contributors.
+## Project Overview
+LRNR is a quiz generation application that uses the **Claude AI API** to create customized quizzes based on user input. Originally built with **jQuery** and **GO**, the application is being refactored into **Node.js** and **React** for improved scalability and maintainability.
 
 ---
 
@@ -31,3 +25,22 @@ The primary goal of this project is to recreate the existing application with th
 - **Tools**: Git, NPM
 
 ---
+
+## Installation Instructions
+To set up the project locally, follow these steps:
+
+1. **Clone the repository**:
+   
+
+## API Documentation
+
+### Claude AI API
+The **Claude AI API** is used to generate quizzes dynamically based on user input. The API requires the following parameters:
+
+#### Request Parameters
+- **Topic**: The subject of the quiz (e.g., "Science", "History").
+- **Expertise Level**: The difficulty level (e.g., "Beginner", "Advanced").
+- **Number of Questions**: The total number of questions in the quiz.
+- **Question Style**: The format of the questions (e.g., "Multiple Choice", "True/False").
+
+#### Example API Request
