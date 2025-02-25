@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Quiz from "./pages/Quiz";
-import QuizPage from "./pages/quizpage";
+import Result from "./pages/Result";
 
 // Importing Header & Footer components
 import Header from "./components/Header";
@@ -30,7 +30,9 @@ function App() {
           {/* Route for Quiz page. If user goes to path "/Quiz", render the quiz options page */}
           <Route path="/quiz" element={<Quiz />} />
 
-          <Route path="/quizpage" element={<QuizPage />} />
+          {/* <Route path="/quizpage" element={<QuizPage />} /> */}
+          <Route path="/result" element={<Result />} />
+
         </Routes>
 
       {/* Footer at bottom of all pages */}
