@@ -7,10 +7,10 @@ const QuizPage = () => {
     const [questionTotal, setQuestionTotal] = useState(5);
     const [currentQuestionTotal, setCurrentQuestionTotal] = useState(1);
 
-    
+
     return (
         <div className="container">
-            <div className="card">
+            <div className="card" style={{boxShadow: 'none'}}>
                 <div className="card-content ">
                     <h1 className="card-title teal-text center-align">{currentQuestionTotal} of {questionTotal}</h1>
                     <h4 className="teal-text">Questions</h4>
