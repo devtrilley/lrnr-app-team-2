@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Quiz from "./pages/Quiz";
-// import QuizPage from "./pages/quizpage";
 import Result from "./pages/Result";
 
 // Importing Header & Footer components
