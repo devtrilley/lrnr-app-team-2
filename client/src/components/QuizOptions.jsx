@@ -109,6 +109,9 @@ export default function QuizOptions() {
       });
 
       console.log(response.data, "<<<< response");
+      const fetchedQuestions = response.data.questions;
+
+      navigate("/quizpage", { state: { questions: fetchedQuestions } });
     } catch (error) {
       console.error("Failed to fetch questions:", error);
       setError("Failed to fetch questions. Please try again.");

@@ -35,7 +35,7 @@ const QuizPage = () => {
             {currentQuestionTotal} of {questionTotal}
           </h1>
           <h4 className="teal-text">Questions</h4>
-          <p>{currentQuestion}</p>
+          <p>{currentQuestion.question}</p>
           <h4 className="teal-text">Your Answer</h4>
           <div className="input-field">
             <input
@@ -48,6 +48,7 @@ const QuizPage = () => {
             className="btn waves-effect waves-light"
             type="submit"
             name="action"
+            onClick={handleNext}
           >
             SUBMIT ANSWER
           </button>

@@ -55,7 +55,7 @@ app.post("/api/claude", async (req, res) => {
     }
 
     quizData = generatedData;
-    res.json({ quiz: generatedData.map(({ question }) => ({ question })) });
+    res.json({ questions: generatedData });
   } catch (error) {
     console.error("Error:", error.response?.data || error.message);
     res.status(500).json({
