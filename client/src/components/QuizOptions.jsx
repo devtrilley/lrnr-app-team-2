@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import M from "materialize-css";
 
 import axios from "axios";
@@ -6,8 +7,9 @@ import axios from "axios";
 export default function QuizOptions() {
   const [selectedOptions, setSelectedOptions] = useState({});
 
-  const [questions, setQuestions] = useState([]);
   const [error, setError] = useState([]);
+
+  const navigate = useNavigate(); // For page redirection
 
   const optionsData = [
     {
@@ -97,7 +99,6 @@ export default function QuizOptions() {
     console.log(topic, expertise, numberOfQuestions, style);
 
     setError("");
-    setQuestions([]);
 
     try {
       const response = await axios.post("/api/claude", {
@@ -107,8 +108,10 @@ export default function QuizOptions() {
         style,
       });
 
-      setQuestions(response.data.questions);
-      console.log(response.data.questions, "<<<< response");
+      console.log(response.data, "<<<< response");
+      const fetchedQuestions = response.data.questions;
+
+      navigate("/quizpage", { state: { questions: fetchedQuestions } });
     } catch (error) {
       console.error("Failed to fetch questions:", error);
       setError("Failed to fetch questions. Please try again.");
