@@ -2,19 +2,17 @@ main {
   /* Sample styling, just putting text in center of page */
   text-align: center;
   min-height: 70vh;
-  img {
-    width: 45%;
-    height: auto;
-  }
+}
+main img {
+  width: 45%;
+  height: auto;
 }
 
-// CSS Reset for nav and footer
 body {
   margin: 0;
   padding: 0;
 }
 
-// Makes nav and footer take full width of screen
 .nav-wrapper, .page-footer {
   width: 100%;
 }
@@ -24,9 +22,8 @@ body {
   font-weight: 100;
 }
 
-// Custom class, home card grid
 .cus-hc-grid {
-  border: none; // Change border for testing, can't leave sass selector empty
+  border: none;
 }
 
 .cus-home-btn {
@@ -70,4 +67,4 @@ body {
   align-items: start;
   justify-content: start;
   margin-bottom: 1.5rem;
-}
+}/*# sourceMappingURL=App.css.map */
