@@ -32,7 +32,7 @@ const QuizPage = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/claude/check-answer", {
+      const response = await fetch("https://lrnr-app-team-2.onrender.com/api/claude/check-answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
