@@ -9,35 +9,40 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// In-memory storage for questions and answers (temporary for demo purposes)
+// In-memory storage for questions (array of strings)
 let quizData = [];
 
-// Endpoint to generate questions with answers
+// Endpoint: Generate questions only (no answers)
 app.post("/api/claude", async (req, res) => {
   const { topic, expertise, numberOfQuestions, style } = req.body;
 
-  // Validate that all required fields are provided
   if (!topic || !expertise || !numberOfQuestions || !style) {
     return res.status(400).json({
-      error:
-        "All fields (topic, expertise, numberOfQuestions, style) are required.",
+      error: "All fields (topic, expertise, numberOfQuestions, style) are required.",
     });
   }
 
   try {
+    const prompt = `
+Generate a JavaScript array of ${numberOfQuestions} strings for ${expertise}-level questions about "${topic}".
+Each string should represent a single question.
+${style !== "normal" ? `Frame the questions in the style of "${style}".` : ""}
+
+**IMPORTANT:** Return ONLY the array in valid **JSON format** without any extra explanation, headings, or comments.
+Example response format:
+[
+  "What is JavaScript and how is it used in web development?",
+  "Can you explain how variables work in JavaScript?",
+  "What is asynchronous programming in JavaScript?"
+]
+`;
+
     const response = await axios.post(
       "https://api.anthropic.com/v1/messages",
       {
         model: "claude-3-5-haiku-20241022",
-        messages: [
-          {
-            role: "user",
-            content: `Generate a JavaScript array of ${numberOfQuestions} objects for ${expertise}-level questions about "${topic}". Each object should have two properties: "question" (the question text) and "answer" (the correct answer). ${
-              style !== "default" ? `Frame them as if asked by ${style}.` : ""
-            } Return the array in valid JSON format.`,
-          },
-        ],
-        max_tokens: 300,
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 1000,
       },
       {
         headers: {
@@ -48,14 +53,26 @@ app.post("/api/claude", async (req, res) => {
       }
     );
 
-    const generatedData = JSON.parse(response.data.content[0].text.trim());
+    const responseText = response.data?.content?.[0]?.text.trim();
 
-    if (!Array.isArray(generatedData)) {
-      throw new Error("Invalid response format from Claude API");
+    // Safely parse JSON with validation
+    let generatedQuestions;
+    try {
+      generatedQuestions = JSON.parse(responseText);
+      if (!Array.isArray(generatedQuestions)) {
+        throw new Error("Parsed data is not a valid array.");
+      }
+    } catch (parseError) {
+      console.error("JSON parsing failed:", parseError.message);
+      return res.status(500).json({
+        error: "Failed to parse Claude API response. Response was not valid JSON.",
+        rawResponse: responseText,
+      });
     }
 
-    quizData = generatedData;
-    res.json({ questions: generatedData });
+    quizData = generatedQuestions;
+    console.log("Generated questions:", quizData);
+    res.json({ questions: generatedQuestions });
   } catch (error) {
     console.error("Error:", error.response?.data || error.message);
     res.status(500).json({
@@ -65,8 +82,8 @@ app.post("/api/claude", async (req, res) => {
   }
 });
 
-// Endpoint to check a user's answer against stored answers
-app.post("/api/claude/check-answer", (req, res) => {
+// Endpoint: Check and evaluate user's answer with detailed feedback
+app.post("/api/claude/check-answer", async (req, res) => {
   const { question, userAnswer } = req.body;
 
   if (!question || !userAnswer) {
@@ -75,23 +92,48 @@ app.post("/api/claude/check-answer", (req, res) => {
     });
   }
 
-  // Find the correct answer based on the question
-  const foundQuestion = quizData.find((q) => q.question === question);
+  try {
+    // Directly ask Claude to evaluate the answer using its own knowledge.
+    const feedbackResponse = await axios.post(
+      "https://api.anthropic.com/v1/messages",
+      {
+        model: "claude-3-5-haiku-20241022",
+        messages: [
+          {
+            role: "user",
+            content: `
+You are an expert evaluator for quiz responses. For the given question and user's answer, provide a JSON response with the following fields:
+{
+  "evaluation": "Correct" | "Partially Correct" | "Incorrect",
+  "explanation": "A detailed explanation on why the answer is correct or not.",
+  "correctAnswer": "The correct answer to the question."
+}
+Return only valid JSON with no additional text.
+Question: "${question}"
+User's Answer: "${userAnswer}"
+            `,
+          },
+        ],
+        max_tokens: 500,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.CLAUDE_API_KEY,
+          "anthropic-version": "2023-06-01",
+        },
+      }
+    );
 
-  if (!foundQuestion) {
-    return res.status(404).json({
-      error: "Question not found. Please generate questions first.",
+    const feedbackData = JSON.parse(feedbackResponse.data?.content?.[0]?.text.trim());
+    res.json(feedbackData);
+  } catch (error) {
+    console.error("Error:", error.response?.data || error.message);
+    res.status(500).json({
+      error: "Failed to evaluate the user's answer",
+      details: error.response?.data || error.message,
     });
   }
-
-  const isCorrect =
-    foundQuestion.answer.trim().toLowerCase() ===
-    userAnswer.trim().toLowerCase();
-
-  res.json({
-    isCorrect,
-    correctAnswer: foundQuestion.answer,
-  });
 });
 
 app.listen(PORT, () =>
