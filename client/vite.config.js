@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     // Proxy API requests to the backend
     proxy: {
-      '/api': 'http://localhost:5000', 
+      '/api': 'https://lrnr-app-team-2.onrender.com', 
     },
   },
 })

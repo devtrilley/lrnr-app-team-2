@@ -2,12 +2,18 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 require("dotenv").config();
-
+const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+});
 
 // In-memory storage for questions (array of strings)
 let quizData = [];
@@ -18,7 +24,8 @@ app.post("/api/claude", async (req, res) => {
 
   if (!topic || !expertise || !numberOfQuestions || !style) {
     return res.status(400).json({
-      error: "All fields (topic, expertise, numberOfQuestions, style) are required.",
+      error:
+        "All fields (topic, expertise, numberOfQuestions, style) are required.",
     });
   }
 
@@ -65,7 +72,8 @@ Example response format:
     } catch (parseError) {
       console.error("JSON parsing failed:", parseError.message);
       return res.status(500).json({
-        error: "Failed to parse Claude API response. Response was not valid JSON.",
+        error:
+          "Failed to parse Claude API response. Response was not valid JSON.",
         rawResponse: responseText,
       });
     }
@@ -125,7 +133,9 @@ User's Answer: "${userAnswer}"
       }
     );
 
-    const feedbackData = JSON.parse(feedbackResponse.data?.content?.[0]?.text.trim());
+    const feedbackData = JSON.parse(
+      feedbackResponse.data?.content?.[0]?.text.trim()
+    );
     res.json(feedbackData);
   } catch (error) {
     console.error("Error:", error.response?.data || error.message);
