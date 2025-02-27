@@ -32,6 +32,13 @@ LRNR is a quiz generation application that uses the **Claude AI API** to create 
 
 ## Screenshot
 
+<img width="1920" alt="Screenshot 2025-02-27 at 2 34 06 PM" src="https://github.com/user-attachments/assets/b6f8e861-e9e6-4bd9-a8df-9d136dcb5744" />
+
+<img width="1920" alt="Screenshot 2025-02-27 at 2 33 46 PM" src="https://github.com/user-attachments/assets/c01ffc53-e539-4c52-a0bd-745118994946" />
+
+
+[Back to Top](#top)
+
 ## Tech Stack
 
 - ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
