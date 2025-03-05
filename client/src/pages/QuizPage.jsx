@@ -24,7 +24,7 @@ const QuizPage = () => {
   const handleSubmitAnswer = async () => {
     if (!userAnswer.trim()) {
       setFeedback({
-        evaluation: "⚠️ Please enter an answer before submitting.",
+        evaluation: "Please enter an answer before submitting.",
       });
       setShowFeedback(true);
       return;
